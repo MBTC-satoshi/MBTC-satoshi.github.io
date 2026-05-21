@@ -6,16 +6,16 @@
 <title>MemeBitcoin</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style>
-body{font-family:-apple-system,sans-serif;text-align:center;padding:40px 24px;color:#eee;background:#000;}
-a.btn{display:block;max-width:320px;margin:28px auto;padding:18px;background:#f7931a;color:#000;font-weight:bold;font-size:18px;border-radius:12px;text-decoration:none;}
-.diag{margin-top:48px;font-size:12px;color:#777;word-break:break-all;}
+body{font-family:-apple-system,sans-serif;text-align:center;padding:56px 24px;color:#eee;background:#0b0b0b;}
+h2{margin:0 0 12px;}
+p{color:#9a9a9a;line-height:1.5;}
+a.btn{display:block;max-width:340px;margin:36px auto 0;padding:18px;background:#f7931a;color:#000;font-weight:700;font-size:18px;border-radius:14px;text-decoration:none;}
 </style>
 </head>
 <body>
-<h2>MemeBitcoin Forum</h2>
-<p>Tap below to open the forum in your browser.</p>
+<h2>🟠 MemeBitcoin</h2>
+<p>Tap below to open the forum in your browser,<br>where you can connect your wallet.</p>
 <a id="btn" class="btn" href="#" target="_blank" rel="noopener">Open in Browser →</a>
-<div class="diag" id="diag"></div>
 <script>
 var DEFAULT="https://www.memebitcoin.org";
 function safe(u){try{var h=new URL(u);if(h.protocol==="https:"&&(h.hostname==="memebitcoin.org"||h.hostname.endsWith(".memebitcoin.org")))return u;}catch(e){}return DEFAULT;}
@@ -24,10 +24,7 @@ var url=raw?safe(raw):DEFAULT;
 var tg=window.Telegram&&window.Telegram.WebApp;
 var btn=document.getElementById("btn");
 btn.href=url;
-btn.addEventListener("click",function(e){
-if(tg&&typeof tg.openLink==="function"){e.preventDefault();try{tg.openLink(url);}catch(err){document.getElementById("diag").textContent="openLink error: "+err;}}
-});
-document.getElementById("diag").textContent="diag — platform="+(tg?tg.platform:"NO-TG")+" | version="+(tg?tg.version:"-")+" | openLink="+(tg?(typeof tg.openLink):"-")+" | url="+url;
+btn.addEventListener("click",function(e){if(tg&&typeof tg.openLink==="function"){e.preventDefault();tg.openLink(url);}});
 if(tg)tg.ready();
 </script>
 </body>
