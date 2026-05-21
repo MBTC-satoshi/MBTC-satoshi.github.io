@@ -10,32 +10,32 @@
 *{box-sizing:border-box;margin:0;padding:0;}
 html,body{height:100%;}
 body{font-family:'Pixelify Sans',monospace;background:#6d9293;display:flex;align-items:center;justify-content:center;padding:20px;}
-.window{width:100%;max-width:340px;background:#fff;border:2px solid #000;box-shadow:4px 4px 0 #000;}
+.window{width:100%;max-width:360px;background:#fff;border:2px solid #000;box-shadow:4px 4px 0 #000;}
 .titlebar{height:24px;border-bottom:2px solid #000;display:flex;align-items:center;padding:0 6px;position:relative;background:repeating-linear-gradient(#000 0 1px,#fff 1px 3px);}
 .closebox{width:13px;height:13px;border:2px solid #000;background:#fff;}
 .title{position:absolute;left:50%;transform:translateX(-50%);background:#fff;padding:0 10px;font-weight:700;font-size:14px;}
-.body{padding:30px 22px 32px;text-align:center;}
-.logo{width:76px;height:76px;border-radius:50%;background:#000;color:#fff;display:flex;align-items:center;justify-content:center;font-size:44px;font-weight:700;margin:0 auto;}
-h1{font-size:24px;margin:16px 0 8px;}
-p{font-size:15px;color:#333;line-height:1.6;}
-.btn{display:inline-block;margin-top:26px;background:#000;color:#fff;font-family:inherit;font-weight:700;font-size:16px;padding:14px 24px;border:2px solid #000;border-radius:12px;box-shadow:0 0 0 3px #fff,0 0 0 5px #000;text-decoration:none;}
+.body{padding:20px;text-align:center;}
+.guide{width:100%;border:2px solid #000;display:none;margin-bottom:16px;}
+p{font-size:15px;color:#333;line-height:1.5;}
+.btn{display:inline-block;margin-top:18px;background:#000;color:#fff;font-family:inherit;font-weight:700;font-size:16px;padding:14px 24px;border:2px solid #000;border-radius:12px;box-shadow:0 0 0 3px #fff,0 0 0 5px #000;text-decoration:none;}
 </style>
 </head>
 <body>
 <div class="window">
 <div class="titlebar"><div class="closebox"></div><div class="title">MemeBitcoin</div></div>
 <div class="body">
-<div class="logo">₿</div>
-<h1>MemeBitcoin</h1>
-<p>Open the site in your browser<br>to connect your wallet.</p>
+<img id="guide" class="guide" alt="">
+<p>Tap below to open in your browser and connect your wallet.</p>
 <a id="btn" class="btn" href="#" target="_blank" rel="noopener">Open in Browser →</a>
 </div>
 </div>
 <script>
 var DEFAULT="https://www.memebitcoin.org";
 function safe(u){try{var h=new URL(u);if(h.protocol==="https:"&&(h.hostname==="memebitcoin.org"||h.hostname.endsWith(".memebitcoin.org")))return u;}catch(e){}return DEFAULT;}
-var raw=new URLSearchParams(location.search).get("url");
-var url=raw?safe(raw):DEFAULT;
+var params=new URLSearchParams(location.search);
+var url=params.get("url")?safe(params.get("url")):DEFAULT;
+var img=params.get("img");
+if(img==="home"||img==="forum"){var g=document.getElementById("guide");g.src=img+".png";g.style.display="block";}
 var tg=window.Telegram&&window.Telegram.WebApp;
 var btn=document.getElementById("btn");
 btn.href=url;
